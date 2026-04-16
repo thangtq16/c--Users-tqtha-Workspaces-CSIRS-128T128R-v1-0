@@ -1,0 +1,234 @@
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-780-            % LinkAdaptationConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-781-            %                  - Link adaptation (LA) configuration structure for
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-782-            %                    downlink transmissions. The structure contains the
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-783-            %                    following fields,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-784-            %   InitialOffset     - Initial MCS offset applied to all UEs.
+5g/netmod/nrScheduler.m:785:            %   StepUp            - Indicates the value by which the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-786-            %                       offset is increased when packet reception fails.
+5g/netmod/nrScheduler.m:787:            %   StepDown          - Indicates the value by which the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-788-            %                       offset is decreased  when packet reception is
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-789-            %                       successful.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-790-            % LinkAdaptationConfigUL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-791-            %                  - Link adaptation (LA) configuration structure for
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-792-            %                    uplink transmissions. The structure has same fields as
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-30-        %MUMIMOConfigDL Structure that contains DL MU-MIMO parameters i.e.,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-31-        %MaxNumUsersPaired, MinNumRBs and SemiOrthogonalityFactor fields
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-32-        MUMIMOConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-33-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-34-        %LinkAdaptationConfigDL Structure that contains DL link adaptation
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:35:        %parameters i.e., InitialOffset, StepUp and StepDown fields
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-36-        LinkAdaptationConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-37-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-38-        %LinkAdaptationConfigUL Structure that contains UL link adaptation
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-39-        %parameters. The structure has same fields as 'LinkAdaptationConfigDL'
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-40-        LinkAdaptationConfigUL
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-240-            %   UPDATECHANNELQUALITYDL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-241-            %   downlink (DL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-242-            %   CHANNELQUALITYINFO is a structure with these fields: RI, PMISet, W, CQI.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-243-            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigDL'.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-244-            %       LinkAdaptationConfigDL - Link adaptation (LA) configuration structure for downlink transmissions.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:245:            %                          The structure contains these fields: InitialOffset, StepUp and StepDown
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-246-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-247-            if schedulerConfig.CSIMeasurementSignalDLType && isfield(channelQualityInfo, 'SRSBasedDLMeasurements')
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-248-                % Update CSI measurement based on SRS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-249-                obj.CSIMeasurementDL.SRS = channelQualityInfo.SRSBasedDLMeasurements;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-250-            else
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-253-                obj.CSIMeasurementDL.CSIRS.RI = channelQualityInfo.RankIndicator;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-254-                obj.CSIMeasurementDL.CSIRS.PMISet.i1 = channelQualityInfo.PMISet.i1;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-255-                obj.CSIMeasurementDL.CSIRS.W = channelQualityInfo.W;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-256-            end
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-257-            % ThangTQ23 fix: do NOT reset MCSOffset here.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:258:            % OLLA accumulates MCSOffset via HARQ ACK/NACK (StepUp/StepDown)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-259-            % across the entire simulation. Resetting on every CSI report
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-260-            % (every 5 ms) wiped the accumulated offset and caused BLER ~60%.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-261-            % Initialisation is already handled in the constructor.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-262-        end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-263-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-266-            %   UPDATECHANNELQUALITYUL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-267-            %   uplink (UL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-268-            %   CHANNELQUALITYINFO is a structure with these fields: RI, TPMI, MCSIndex.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-269-            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigUL'.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-270-            %       LinkAdaptationConfigUL - Link adaptation (LA) configuration structure for uplink transmissions.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:271:            %                          The structure contains these fields: InitialOffset, StepUp and StepDow
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-272-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-273-            % Update CSI measurement
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-274-            obj.CSIMeasurementUL.MCSIndex = channelQualityInfo.MCSIndex;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-275-            obj.CSIMeasurementUL.RI = channelQualityInfo.RankIndicator;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-276-            obj.CSIMeasurementUL.TPMI = channelQualityInfo.TPMI;
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-337-            %   UPDATECHANNELQUALITYDL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-338-            %   downlink (DL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrUEContext.m-339-            %   CHANNELQUALITYINFO is a structure with these fields: GNBCarrierIndex, RI, PMISet, W, CQI.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-340-            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigDL'.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-341-            %       LinkAdaptationConfigDL - Link adaptation (LA) configuration structure for downlink transmissions.
+5g/netmod/+nr5g/+internal/nrUEContext.m:342:            %                          The structure contains these fields: InitialOffset, StepUp and StepDown
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-343-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-344-            carrierIndex = channelQualityInfo.GNBCarrierIndex;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-345-            % Update the measurements for the carrier
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-346-            ccInfo = obj.ComponentCarrier(carrierIndex);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-347-            ccInfo.updateChannelQualityDL(channelQualityInfo, schedulerConfig);
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-357-            %   UPDATECHANNELQUALITYUL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-358-            %   uplink (UL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrUEContext.m-359-            %   CHANNELQUALITYINFO is a structure with these fields: GNBCarrierIndex, RI, TPMI, MCSIndex.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-360-            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigUL'.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-361-            %       LinkAdaptationConfigUL - Link adaptation (LA) configuration structure for uplink transmissions.
+5g/netmod/+nr5g/+internal/nrUEContext.m:362:            %                          The structure contains these fields: InitialOffset, StepUp and StepDown
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-363-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-364-            carrierIndex = channelQualityInfo.GNBCarrierIndex;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-365-            % Update the measurements for the carrier
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-366-            ccInfo = obj.ComponentCarrier(carrierIndex);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-367-            ccInfo.updateChannelQualityUL(channelQualityInfo, schedulerConfig);
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-381-            %   RxResult - 0 means NACK or no feedback received. 1 means ACK.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-382-            %   GNBCARRIERINDEX -Index of the carrier
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-383-            %
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-384-            % SCHEDULERCONFIG is a scheduler configuration structure contains one of the following fields.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-385-            %   LinkAdaptationConfigDL - Link adaptation (LA) configuration structure for downlink transmissions.
+5g/netmod/+nr5g/+internal/nrUEContext.m:386:            %                            The structure contains the fields InitialOffset, StepUp and StepDown fields
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-387-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-388-            harqIndex = rxResultInfo.HARQID+1;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-389-            rxResult = rxResultInfo.RxResult;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-390-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-391-            ccInfo = obj.ComponentCarrier(rxResultInfo.GNBCarrierIndex); % Read the component carrier info
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-446-            %   RxResult - 0 means Rx failure or no reception. 1 means Rx success.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-447-            %   GNBCARRIERINDEX - Index of the carrier
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-448-            %
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-449-            %   SCHEDULERCONFIG is a scheduler configuration structure contains one of the following fields.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-450-            %   LinkAdaptationConfigUL - Link adaptation (LA) configuration structure for uplink transmissions.
+5g/netmod/+nr5g/+internal/nrUEContext.m:451:            %                            The structure contains the fields InitialOffset, StepUp and StepDown fields
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-452-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-453-            harqIndex = rxResultInfo.HARQID+1;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-454-            rxResult = rxResultInfo.RxResult;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-455-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-456-            ccInfo = obj.ComponentCarrier(rxResultInfo.GNBCarrierIndex); % Read the component carrier info
+--
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-102-        %BufferSize Initial buffer size
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-103-        % Number of packets that can be stored in the packet buffer initially
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-104-        % The default value is 20.
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-105-        BufferSize = 20
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-106-
+wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m:107:        %BufferStepUpSize Step size to expand the packet buffer when the existing buffer is filled up
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-108-        % The default value is 20.
+wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m:109:        BufferStepUpSize = 20
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-110-
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-111-        %PacketBuffer Array containing the details of all the packets being received
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-112-        PacketBuffer
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-113-
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-114-        %IsActive Array of flags that maps to elements in 'PacketBuffer'
+--
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-975-            removeObsoletePackets(obj, currentTime-obj.BufferCleanupTime);
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-976-
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-977-             bufferIdx = find(~obj.IsActive, 1);
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-978-             if isempty(bufferIdx) % Increase the buffer size
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-979-                 bufferIdx = size(obj.IsActive, 1) + 1; % Next empty buffer index
+wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m:980:                 stepSize = obj.BufferStepUpSize;
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-981-                 obj.IsActive = [obj.IsActive; false(stepSize, 1)];
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-982-                 obj.PacketEndTimes = [obj.PacketEndTimes; zeros(stepSize, 1)-1];
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-983-                 obj.PacketBuffer = [obj.PacketBuffer; repmat(obj.PacketStruct,stepSize,1)];
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-984-             end
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/+wirelessnetwork/+internal/interferenceBuffer.m-985-        end
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-17-%                           errors at the UE node. To determine the final
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-18-%                           MCS for the DL transmission, the scheduler
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-19-%                           applies this offset to the channel measurement
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-20-%                           based MCS. It is an integer in the range [-27,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-21-%                           27]. The default value is 0.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:22:%       StepUp            - Incremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-23-%                           packet reception fails. It is a numeric
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-24-%                           scalar in the range [0, 27]. The default value
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-25-%                           is 0.27.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:26:%       StepDown          - Decremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-27-%                           packet reception is successful. It is a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-28-%                           numeric scalar in the range [0, 27]. The
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-29-%                           default value is 0.03.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-30-%   OFFSET              - Current MCS offset
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-31-%   RXRESULT            - Reception feedback where '1' means successful
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-35-% reference [1], with a notable modification. In contrast to the original
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-36-% approach, which applies an offset to the Signal-to-Noise Ratio (SNR), the
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-37-% adopted method applies the offset directly to the MCS index.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-38-% 
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-39-% The adopted link adaptation algorithm consists of these steps:
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:40:%   1. Define the LA configuration parameters StepUp and StepDown.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:41:%      The target Block error rate, TargetBLER, is defined as StepDown /
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:42:%      (StepDown + StepUp).
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-43-%   2. Upon receiving channel measurements feedback (CQI) from the UE node,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-44-%      the gNB maps the reported CQI to an appropriate MCS value. The MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-45-%      table used for the DL LA complies with 3GPP TS 38.214, Table
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-46-%      5.1.3.1-2.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-47-%   3. Reset MCSOffset to InitialOffset on each CSI reporting
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-48-%      periodicity, considering any channel measurement errors.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-49-%   4. Determine the MCS for physical downlink shared channel (PDSCH)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-50-%      transmission as the MCS reported by the UE node minus the MCS offset
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-51-%      (PDSCH_MCS = UEReportedMCS - MCSOffset)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-52-%   5. If the UE reports a successful PDSCH reception, decrease the
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:53:%      MCSOffset by StepDown.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-54-%   6. If the UE reports a failed PDSCH reception, increase the
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:55:%      MCSOffset by StepUp.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-56-%   
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-57-% Similarly, for UL link adaptation, the gNB calculates the  UL MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-58-% based on the sounding reference signal (SRS) channel measurements.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-59-% Determine the physical uplink shared channel (PUSCH) as the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-60-% calculated by the gNB node minus the MCS offset (PUSCH_MCS =
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-69-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-70-% As per 3GPP TS 38.214 - Table 5.1.3.1-2, '27' is the maximum
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-71-% configurable MCS index.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-72-if rxResult == 1
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-73-    % Reception is successful
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:74:    mcsOffset = max(-27, offset-laConfig.StepDown);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-75-else
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-76-    % Reception is failure 
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:77:    mcsOffset = min(27, offset+laConfig.StepUp);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-78-end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-79-end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-80-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-492-            updatedLAConfig = defaultLAConfig;
+5g/netmod/+nr5g/+internal/nrNodeValidation.m-493-            for fieldIdx = 1:numel(actFields)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-494-                name = actFields{fieldIdx};
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-495-                value = linkAdaptationConfig.(name);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-496-                switch name
+5g/netmod/+nr5g/+internal/nrNodeValidation.m:497:                    case {'StepUp','StepDown'}
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-498-                        validateattributes(value, {'numeric'}, {'nonempty', 'scalar', '>=', 0, '<=', 27}, name, name);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-499-                    case 'InitialOffset'
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-500-                        validateattributes(value, {'numeric'}, {'nonempty', 'scalar', '>=', -27, '<=', 27}, name, name);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrNodeValidation.m-501-                    otherwise
+5g/netmod/+nr5g/+internal/nrNodeValidation.m-502-                        coder.internal.error('nr5g:nrGNB:InvalidMethodArgs', name);
+--
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1102-            %                           the MCS for the physical downlink shared
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1103-            %                           channel (PDSCH) transmission by subtracting
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1104-            %                           MCSOffset from the MCS obtained from the
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1105-            %                           channel measurements. It is an integer in the
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1106-            %                           range [-27, 27]. The default value is 0.
+wirelessnetwork/wirelessnetwork/nrGNB.m:1107:            %       StepUp            - Incremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1108-            %                           packet reception fails. LA considers only the
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1109-            %                           failure of new transmissions while ignoring any
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1110-            %                           re-transmission feedback. It is a numeric
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1111-            %                           scalar in the range [0, 27]. The default value
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1112-            %                           is 0.27.
+wirelessnetwork/wirelessnetwork/nrGNB.m:1113:            %       StepDown          - Decremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1114-            %                           packet reception is successful. LA considers
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1115-            %                           only the success of new transmissions while
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1116-            %                           ignoring any re-transmission feedback. It is a
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1117-            %                           numeric scalar in the range [0, 27]. The
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1118-            %                           default value is 0.03.
+--
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1146-            mumimoConfigDLCSIRS = struct(MaxNumUsersPaired=2, SemiOrthogonalityFactor=0.75, ...
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1147-                MinNumRBs=6, MinCQI=7, MaxNumLayers=8);
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1148-            mumimoConfigDLSRS = struct(MaxNumUsersPaired=2, MinNumRBs=6, ...
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1149-                MaxNumLayers=8, MinSINR=10);
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1150-            % Default values for LA config parameter
+wirelessnetwork/wirelessnetwork/nrGNB.m:1151:            defaultLAConfigDL = struct(StepUp=0.27, StepDown=0.03, InitialOffset=0);
+wirelessnetwork/wirelessnetwork/nrGNB.m:1152:            defaultLAConfigUL = struct(StepUp=0.27, StepDown=0.03, InitialOffset=0);
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1153-            enableType2Report = false;
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1154-
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1155-            isCustomScheduler = false;
+/data/part1/thangtq23/CSIRS_128T128R/wirelessnetwork/wirelessnetwork/nrGNB.m-1156-            % Get the user specified parameters for scheduler
+wirelessnetwork/wirelessnetwork/nrGNB.m-1157-            for idx=1:2:nargin-1

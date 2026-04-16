@@ -1,0 +1,252 @@
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-450-                selectedUEIdx = find(updatedEligibleUEs == selectedUE, 1); % Find UE index in eligible UEs set
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-451-                % MCS offset value
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-452-                carrierContext = ueContext(selectedUE).ComponentCarrier(gNBCarrierIndex);
+5g/netmod/nrScheduler.m:453:                mcsOffset = fix(carrierContext.MCSOffset(schedulerInput.linkDir+1));
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-454-                % Fill the new transmission RAT-1 downlink assignment properties
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-455-                dlAssignments(index).RNTI = selectedUE;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-456-
+5g/netmod/nrScheduler.m-457-                dlAssignments(index).FrequencyAllocation = freqAllocation(index, :);
+5g/netmod/nrScheduler.m:458:                dlAssignments(index).MCSIndex = min(max(mcsIndex(index) - mcsOffset, 0), 27);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-459-                dlAssignments(index).W = W{selectedUEIdx};
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-460-                % Mark frequency resources as assigned to the selected UE in this TTI
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-461-                if schedulerConfig.ResourceAllocationType % RAT-1
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-678-                ueInfo = ueContext(selectedUE);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-679-                selectedUEIdx = find(updatedEligibleUEs == selectedUE, 1); % Find UE index in eligible UEs set
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-680-                % MCS offset value
+5g/netmod/nrScheduler.m:681:                mcsOffset = fix(ueInfo.ComponentCarrier(gNBCarrierIndex).MCSOffset(schedulerInput.linkDir+1));
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-682-                % Fill the new transmission uplink grant properties
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-683-                ulGrants(index).RNTI = selectedUE;
+5g/netmod/nrScheduler.m-684-                ulGrants(index).FrequencyAllocation = freqAllocation(index, :);
+5g/netmod/nrScheduler.m:685:                ulGrants(index).MCSIndex = min(max(mcsIndex(index) - mcsOffset, 0), 27);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-686-                ulGrants(index).NumLayers = rank(selectedUEIdx);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-687-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-688-                % Mark frequency resources as assigned to the selected UE in this TTI
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-777-            %                       in number of slots. A Proportional Fair (PF)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-778-            %                       scheduler uses this time constant to calculate
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-779-            %                       the average data rate.
+5g/netmod/nrScheduler.m:780:            % LinkAdaptationConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-781-            %                  - Link adaptation (LA) configuration structure for
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-782-            %                    downlink transmissions. The structure contains the
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-783-            %                    following fields,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-784-            %   InitialOffset     - Initial MCS offset applied to all UEs.
+5g/netmod/nrScheduler.m:785:            %   StepUp            - Indicates the value by which the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-786-            %                       offset is increased when packet reception fails.
+5g/netmod/nrScheduler.m:787:            %   StepDown          - Indicates the value by which the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-788-            %                       offset is decreased  when packet reception is
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-789-            %                       successful.
+5g/netmod/nrScheduler.m:790:            % LinkAdaptationConfigUL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-791-            %                  - Link adaptation (LA) configuration structure for
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-792-            %                    uplink transmissions. The structure has same fields as
+5g/netmod/nrScheduler.m:793:            %                    'LinkAdaptationConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-794-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-795-            % Initialize cell configuration object
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-796-            cellConfigStruct = struct(SubcarrierSpacing=param.SubcarrierSpacing, NumResourceBlocks=param.NumResourceBlocks, ...
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-806-            % Initialize scheduler configuration object
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-807-            strategyIndependentConfig = {'ResourceAllocationType', 'MaxNumUsersPerTTI', 'RVSequence', 'CSIMeasurementSignalDLType'};
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-808-            strategySpecificConfig = {'Scheduler', 'PFSWindowSize', 'FixedMCSIndexDL', 'FixedMCSIndexUL', 'MUMIMOConfigDL', ...
+5g/netmod/nrScheduler.m:809:                'LinkAdaptationConfigDL', 'LinkAdaptationConfigUL'};
+5g/netmod/nrScheduler.m-810-            for idx=1:size(strategyIndependentConfig,2)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-811-                if strcmp('CSIMeasurementSignalDLType', strategyIndependentConfig(idx))
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/nrScheduler.m-812-                    schedulerConfigStruct.(char(strategyIndependentConfig(idx))) = strcmpi(param.CSIMeasurementSignalDL, "SRS");
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-31-        %MaxNumUsersPaired, MinNumRBs and SemiOrthogonalityFactor fields
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-32-        MUMIMOConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-33-
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:34:        %LinkAdaptationConfigDL Structure that contains DL link adaptation
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:35:        %parameters i.e., InitialOffset, StepUp and StepDown fields
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:36:        LinkAdaptationConfigDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-37-
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:38:        %LinkAdaptationConfigUL Structure that contains UL link adaptation
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:39:        %parameters. The structure has same fields as 'LinkAdaptationConfigDL'
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:40:        LinkAdaptationConfigUL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-41-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-42-        %CSIMeasurementSignalDLType The value of "CSIMeasurementSignalDLType" is 1 if the
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-43-        % specified value of CSIMeasurementSignalDL is 'SRS'.  It is 0 if the specified
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-111-            %   FixedMCSIndexDL               - Use MCS index for DL transmissions without considering any CQI
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-112-            %   FixedMCSIndexUL               - Use MCS index for DL transmissions without considering any CQI
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-113-            %   MUMIMOConfigDL                - Enable DL multi-user multiple-input and multiple-output (MU-MIMO)
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:114:            %   LinkAdaptationConfigDL        - LA configuration structure for downlink transmissions
+5g/netmod/+nr5g/+internal/nrSchedulerConfig.m:115:            %   LinkAdaptationConfigUL        - LA configuration structure for uplink transmissions
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-116-            %   RVSequence                    - Redundancy version (RV) sequence
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-117-            %   CSIMeasurementSignalDLType    - DL measurement signal type as SRS (value 1) or CSI-RS (value 0)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrSchedulerConfig.m-118-
+--
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:1:function mcsOffset = getMCSIndexOffset(laConfig,offset,rxResult)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-2-%getMCSIndexOffset returns the updated Modulation and Coding
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-3-% Scheme (MCS) offset.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-4-%
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-19-%                           applies this offset to the channel measurement
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-20-%                           based MCS. It is an integer in the range [-27,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-21-%                           27]. The default value is 0.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:22:%       StepUp            - Incremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-23-%                           packet reception fails. It is a numeric
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-24-%                           scalar in the range [0, 27]. The default value
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-25-%                           is 0.27.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:26:%       StepDown          - Decremental value for the MCS offset when a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-27-%                           packet reception is successful. It is a
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-28-%                           numeric scalar in the range [0, 27]. The
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-29-%                           default value is 0.03.
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-37-% adopted method applies the offset directly to the MCS index.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-38-% 
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-39-% The adopted link adaptation algorithm consists of these steps:
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:40:%   1. Define the LA configuration parameters StepUp and StepDown.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:41:%      The target Block error rate, TargetBLER, is defined as StepDown /
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:42:%      (StepDown + StepUp).
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-43-%   2. Upon receiving channel measurements feedback (CQI) from the UE node,
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-44-%      the gNB maps the reported CQI to an appropriate MCS value. The MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-45-%      table used for the DL LA complies with 3GPP TS 38.214, Table
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-46-%      5.1.3.1-2.
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:47:%   3. Reset MCSOffset to InitialOffset on each CSI reporting
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-48-%      periodicity, considering any channel measurement errors.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-49-%   4. Determine the MCS for physical downlink shared channel (PDSCH)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-50-%      transmission as the MCS reported by the UE node minus the MCS offset
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:51:%      (PDSCH_MCS = UEReportedMCS - MCSOffset)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-52-%   5. If the UE reports a successful PDSCH reception, decrease the
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:53:%      MCSOffset by StepDown.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-54-%   6. If the UE reports a failed PDSCH reception, increase the
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:55:%      MCSOffset by StepUp.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-56-%   
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-57-% Similarly, for UL link adaptation, the gNB calculates the  UL MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-58-% based on the sounding reference signal (SRS) channel measurements.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-59-% Determine the physical uplink shared channel (PUSCH) as the MCS
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-60-% calculated by the gNB node minus the MCS offset (PUSCH_MCS =
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:61:% gNBMeasuredMCS - MCSOffset)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-62-%   
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-63-% [1] M. G. Sarret, D. Catania, F. Frederiksen, A. F. Cattoni, G.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-64-% Berardinelli, and P. Mogensen,  "Dynamic outer loop link adaptation for
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-71-% configurable MCS index.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-72-if rxResult == 1
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-73-    % Reception is successful
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:74:    mcsOffset = max(-27, offset-laConfig.StepDown);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-75-else
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-76-    % Reception is failure 
+5g/netmod/+nr5g/+internal/getMCSIndexOffset.m:77:    mcsOffset = min(27, offset+laConfig.StepUp);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-78-end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-79-end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/getMCSIndexOffset.m-80-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-125-        %NumRBGs Number of RBGs in the bandwidth
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-126-        NumRBGs
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-127-
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:128:        %MCSOffset Specifies the current MCS offset applied to the PXSCH transmissions.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-129-        % It is a 1-by-2 matrix with corresponding MCS offsets for
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-130-        %DL/UL transmissions.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:131:        MCSOffset
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-132-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-133-        %XOverheadPDSCH Additional overheads in PDSCH transmission
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-134-        XOverheadPDSCH = 0;
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-150-            % RBGSizeConfig                - RBG configuration to derive number of RBs in an RBG
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-151-            % InitialCQIDL                 - Initial DL CQI
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-152-            % InitialMCSIndexUL            - Initial UL MCS
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:153:            % InitialMCSOffsetDL           - Initial MCS offset (link adaptation) for DL direction
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:154:            % InitialMCSOffsetUL           - Initial MCS offset (link adaptation) for UL direction
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-155-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-156-            % CELLCONFIG is cell configuration.
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-157-            % SCHEDULERCONFIG is scheduler configuration.
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-225-                % Initialize link adaptation MCS offset values for the carrier. The
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-226-                % first column contains MCS offset in DL direction and second column
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-227-                % contains MCS offset in UL direction.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:228:                obj.MCSOffset = [0 0];
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:229:                if ~isempty(schedulerConfig.LinkAdaptationConfigDL)
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:230:                    obj.MCSOffset(1) = param.InitialMCSOffsetDL;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-231-                end
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:232:                if ~isempty(schedulerConfig.LinkAdaptationConfigUL)
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:233:                    obj.MCSOffset(2) = param.InitialMCSOffsetUL;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-234-                end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-235-            end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-236-        end
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-240-            %   UPDATECHANNELQUALITYDL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-241-            %   downlink (DL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-242-            %   CHANNELQUALITYINFO is a structure with these fields: RI, PMISet, W, CQI.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:243:            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigDL'.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:244:            %       LinkAdaptationConfigDL - Link adaptation (LA) configuration structure for downlink transmissions.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:245:            %                          The structure contains these fields: InitialOffset, StepUp and StepDown
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-246-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-247-            if schedulerConfig.CSIMeasurementSignalDLType && isfield(channelQualityInfo, 'SRSBasedDLMeasurements')
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-248-                % Update CSI measurement based on SRS
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-254-                obj.CSIMeasurementDL.CSIRS.PMISet.i1 = channelQualityInfo.PMISet.i1;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-255-                obj.CSIMeasurementDL.CSIRS.W = channelQualityInfo.W;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-256-            end
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:257:            if ~isempty(schedulerConfig.LinkAdaptationConfigDL)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-258-                % Reset link adaptation MCS offset value to initial offset
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:259:                obj.MCSOffset(1) = schedulerConfig.LinkAdaptationConfigDL.InitialOffset;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-260-            end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-261-        end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-262-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-265-            %   UPDATECHANNELQUALITYUL(OBJ, CHANNELQUALITYINFO) updates
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-266-            %   uplink (UL) channel quality information for a UE.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-267-            %   CHANNELQUALITYINFO is a structure with these fields: RI, TPMI, MCSIndex.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:268:            %   SCHEDULERCONFIG is a structure containing field 'LinkAdaptationConfigUL'.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:269:            %       LinkAdaptationConfigUL - Link adaptation (LA) configuration structure for uplink transmissions.
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:270:            %                          The structure contains these fields: InitialOffset, StepUp and StepDow
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-271-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-272-            % Update CSI measurement
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-273-            obj.CSIMeasurementUL.MCSIndex = channelQualityInfo.MCSIndex;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-274-            obj.CSIMeasurementUL.RI = channelQualityInfo.RankIndicator;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-275-            obj.CSIMeasurementUL.TPMI = channelQualityInfo.TPMI;
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:276:            if ~isempty(schedulerConfig.LinkAdaptationConfigUL)
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-277-                % Reset link adaptation MCS offset value to initial offset
+5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m:278:                obj.MCSOffset(2) = schedulerConfig.LinkAdaptationConfigUL.InitialOffset;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-279-            end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-280-        end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrComponentCarrierContext.m-281-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-86-        %RBGSizeConfig RBG configuration to derive number of RBs in an RBG
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-87-        RBGSizeConfig
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-88-
+5g/netmod/+nr5g/+internal/nrUEContext.m:89:        %InitialMCSOffsetDL Initial MCS offset (link adaptation) for DL direction
+5g/netmod/+nr5g/+internal/nrUEContext.m:90:        InitialMCSOffsetDL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-91-
+5g/netmod/+nr5g/+internal/nrUEContext.m:92:        %InitialMCSOffsetUL Initial MCS offset (link adaptation) for UL direction
+5g/netmod/+nr5g/+internal/nrUEContext.m:93:        InitialMCSOffsetUL
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-94-    end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-95-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-96-    properties(Hidden)
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-202-            obj.UEsServedDataRate([1 2]) = 1;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-203-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-204-            % Read initial MCS offset for LA
+5g/netmod/+nr5g/+internal/nrUEContext.m:205:            obj.InitialMCSOffsetDL = 0;
+5g/netmod/+nr5g/+internal/nrUEContext.m:206:            obj.InitialMCSOffsetUL = 0;
+5g/netmod/+nr5g/+internal/nrUEContext.m:207:            if ~isempty(schedulerConfig.LinkAdaptationConfigDL)
+5g/netmod/+nr5g/+internal/nrUEContext.m:208:                obj.InitialMCSOffsetDL = schedulerConfig.LinkAdaptationConfigDL.InitialOffset;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-209-            end
+5g/netmod/+nr5g/+internal/nrUEContext.m:210:            if ~isempty(schedulerConfig.LinkAdaptationConfigUL)
+5g/netmod/+nr5g/+internal/nrUEContext.m:211:                obj.InitialMCSOffsetUL = schedulerConfig.LinkAdaptationConfigUL.InitialOffset;
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-212-            end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-213-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-214-            % Set up carrier context w.r.t index corresponding to primary carrier (empty
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-219-                NumReceiveAntennas=param.NumReceiveAntennas, CSIRSConfiguration=param.CSIRSConfiguration, ...
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-220-                SRSConfiguration=param.SRSConfiguration, NumHARQ=obj.NumHARQ, ...
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-221-                RBGSizeConfig=obj.RBGSizeConfig, InitialCQIDL=obj.InitialCQIDL, ...
+5g/netmod/+nr5g/+internal/nrUEContext.m:222:                InitialMCSIndexUL=obj.InitialMCSIndexUL, InitialMCSOffsetDL=obj.InitialMCSOffsetDL, ...
+5g/netmod/+nr5g/+internal/nrUEContext.m:223:                InitialMCSOffsetUL=obj.InitialMCSOffsetUL);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-224-            obj.ComponentCarrier(param.PrimaryCarrierIndex) = nr5g.internal.nrComponentCarrierContext(primaryConnectionInfo, cellConfig, schedulerConfig);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-225-
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-226-            % Retain a copy of primary carrier context for these properties (for
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-238-                NumReceiveAntennas=connectionInfo.NumReceiveAntennas, CSIRSConfiguration=connectionInfo.CSIRSConfiguration, ...
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-239-                SRSConfiguration=connectionInfo.SRSConfiguration, NumHARQ=obj.NumHARQ, ...
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-240-                RBGSizeConfig=obj.RBGSizeConfig, InitialCQIDL=obj.InitialCQIDL, ...
+5g/netmod/+nr5g/+internal/nrUEContext.m:241:                InitialMCSIndexUL=obj.InitialMCSIndexUL, InitialMCSOffsetDL=obj.InitialMCSOffsetDL, ...
+5g/netmod/+nr5g/+internal/nrUEContext.m:242:                InitialMCSOffsetUL=obj.InitialMCSOffsetUL);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-243-            obj.ComponentCarrier(carrierIndex) = nr5g.internal.nrComponentCarrierContext(connectionInfo, cellConfig, schedulerConfig);
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-244-        end
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-245-
+--
+/data/part1/thangtq23/CSIRS_128T128R/5g/netmod/+nr5g/+internal/nrUEContext.m-337-            %   UPDATECHANNELQUALITYDL(OBJ, CHANNELQUALITYINFO) updates
+
+[Showing results with pagination = limit: 250]
